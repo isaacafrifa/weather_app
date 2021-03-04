@@ -9,7 +9,7 @@ class App extends Component{
 
   
   render () {
-
+//custom config
     let config = {
       num: [4, 7],
       rps: 0.1,
@@ -25,6 +25,7 @@ class App extends Component{
       // emitter: "follow",
       random: 15
     };
+
     if (Math.random() > 0.85) {
       config = Object.assign(config, {
         onParticleUpdate: (ctx, particle) => {
