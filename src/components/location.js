@@ -1,18 +1,23 @@
 
-
-
-const Location = (props) => {
+const Location = ({ city, country }) => {
     return (
-    <div className="location">
-<h2>city</h2>
-<h4>country</h4>
+        <div className="location">
+            {/* {console.log("----->" + JSON.stringify(country))} */}
+            {city && country ? (
+                <div >
+                    <h5>{city}</h5>
+                    <h6>{country}</h6>
+                </div>
+            ) :
+                <div>
+                    <h5>city</h5>
+                    <h6>country</h6>
+                </div>
+            }
 
-        {/* <SmallLabel weight="400">{date}</SmallLabel> */}
-    </div> 
-     );
+        </div>
+    );
 }
 
 
-
- 
 export default Location;

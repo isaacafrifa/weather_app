@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ParticlesBg from 'particles-bg';
-import Card from "./components/card";
+import MainContent from "./components/MainContent";
 
 /*
 *ParticlesBg requires class components not function
@@ -45,7 +45,7 @@ class App extends Component{
 
     return (
       <div className="app">
-        <Card />
+        <MainContent />
         <ParticlesBg type="custom" config={config} bg={true} />
       </div>
     )
