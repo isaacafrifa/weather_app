@@ -1,7 +1,7 @@
 
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import { useState, useEffect } from "react";
-import { API_KEY } from "../constants/constants";
+import { API_KEY, API_URL } from "../constants/constants";
 import axios from "axios";
 import { useForm } from 'react-hook-form';
 import Card from '../components/card';
@@ -14,9 +14,7 @@ const MainContent = () => {
     const [hasNotFoundError, setHasNotFoundError] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [isSuccessful, setIsSuccessful] = useState(false)
-    const [location, setLocation] = useState({})
-    //   const [city, setCity] = useState(null)
-    //   const [country, setCountry] = useState(null)
+    const [weather, setWeather] = useState({})
 
     //Using React Hook Form 
     const { register, handleSubmit, getValues, errors } = useForm(); // initialize the hook here
@@ -61,46 +59,58 @@ const MainContent = () => {
         setHasError(false)
         setHasNotFoundError(false)
         setIsSuccessful(false)
-        setLocation(null)
-    
+        setWeather(null)
+
     }
 
     const onSubmit = (data, e) => {
         e.target.reset(); // reset after form submit
         resetStateMessages()
         setIsLoading(true)
-  
+
         // api.openweathermap.org/data/2.5/weather?q=London,uk&appid={API key}
-  axios.get('http://api.openweathermap.org/data/2.5/weather', {
-        params: {
-            q: data.cityName,
-            units: 'metric', //For temperature in Celsius use units=metric
-            appid: API_KEY
-        }
-    })
-        .then(function (response) {
-            console.log(response);
-            // console.log(response.data);
-            let jsonObject ={
-                city: response.data.name,
-                country: response.data.sys.country
+        axios.get( API_URL, {
+            params: {
+                q: data.cityName,
+                units: 'metric', //For temperature in Celsius use units=metric
+                appid: API_KEY
             }
-           setLocation(jsonObject);
-           setIsLoading(false)
-           setIsSuccessful(true)
-        //   console.log(jsonObject);
         })
-        .catch(function (error) {
-            console.log(error);
-            if (error.response.status === 404) {
-                setHasNotFoundError(true)
+            .then(function (response) {
+                console.log(response);
+                // console.log(response.data);
+                let weatherObject = {
+                    city: response.data.name,
+                    country: response.data.sys.country,
+                    timezone: response.data.timezone,
+                    temperature: response.data.main.temp,
+                    minTemperature: response.data.main.temp_min,
+                    maxTemperature: response.data.main.temp_max,
+                    feelsLike: response.data.main.feels_like,
+                    humidity: response.data.main.humidity,
+                    windSpeed: response.data.wind.speed,
+                    weatherDescription: response.data.weather[0].description,
+                    weatherIcon: response.data.weather[0].icon,
+                    sunrise: response.data.sys.sunrise,
+                    sunset: response.data.sys.sunset,
+                    lastUpdate: response.data.dt 
+                }
+                setWeather(weatherObject);
                 setIsLoading(false)
-            }
-            else {
-                setHasError(true)
-                setIsLoading(false)
-            }
-         });
+                setIsSuccessful(true)
+                //   console.log(weatherObject);
+            })
+            .catch(function (error) {
+                console.log(error);
+                if (error.response.status === 404) {
+                    setHasNotFoundError(true)
+                    setIsLoading(false)
+                }
+                else {
+                    setHasError(true)
+                    setIsLoading(false)
+                }
+            });
 
     }
 
@@ -111,7 +121,7 @@ const MainContent = () => {
                 <Row>
                     <Col>
 
-                        <form onSubmit={handleSubmit(onSubmit)}>
+                        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                             <div className="form-group">
 
                                 <input className="form-control py-4"
@@ -129,6 +139,7 @@ const MainContent = () => {
                             <button type="submit"
                                 className="btn btn-primary"> Get weather </button>
                         </form>
+                        <br/>
 
                         {/* Show ProgressSpinner */}
                         {isLoading && (
@@ -152,10 +163,10 @@ const MainContent = () => {
 
                         {/* Show Card if no error */}
                         {isSuccessful && (
-                            <Card 
-                            location={location}
+                            <Card
+                                weather={weather}
                             />
-                          )}
+                        )}
 
                     </Col>
                 </Row>

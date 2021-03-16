@@ -10,7 +10,7 @@ import ExtraDetails from './extra';
 
 
 
-const Card = ({ location }) => {
+const Card = ({ weather }) => {
     return (
         <div className="container">
             <Tilt
@@ -30,20 +30,28 @@ const Card = ({ location }) => {
                         <Row>
                             <Col xs={5} md={6} >
                                 <Location
-                                    city={location.city}
-                                    country={location.country}
-                                //props={location}
+                                    city={weather.city}
+                                    country={weather.country}
+                                    timezone={weather.timezone}
                                 />
                             </Col>
                             <Col xs={7} md={6}>
-                                <Temperature />
+                                <Temperature 
+                                  tempValue={weather.temperature}
+                                  minTemp={weather.minTemperature}
+                                  maxTemp={weather.maxTemperature} />
                             </Col>
                         </Row>
                         <div className="card-info">
-                            <Weather />
+                            <Weather 
+                            weatherDescription={weather.weatherDescription}
+                            weatherIcon={weather.weatherIcon} />
                         </div>
                         <div className="footer">
-                            <ExtraDetails />
+                            <ExtraDetails 
+                            //not breaking obj down
+                            weather={weather} 
+                            />
                         </div>
                     </div>
                 </div>
