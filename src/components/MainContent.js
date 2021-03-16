@@ -73,7 +73,6 @@ const MainContent = () => {
             });
     }
 
-
     return (
         <div>
             <Container>
