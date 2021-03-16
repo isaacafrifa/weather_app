@@ -17,8 +17,7 @@ const MainContent = () => {
     const [weather, setWeather] = useState({})
 
     //Using React Hook Form 
-    const { register, handleSubmit, getValues, errors } = useForm(); // initialize the hook here
-
+    const { register, handleSubmit, errors } = useForm(); // initialize the hook here
 
     //get Weather Details
     useEffect(() => {
@@ -78,7 +77,6 @@ const MainContent = () => {
         })
             .then(function (response) {
                 console.log(response);
-                // console.log(response.data);
                 let weatherObject = {
                     city: response.data.name,
                     country: response.data.sys.country,
@@ -89,6 +87,7 @@ const MainContent = () => {
                     feelsLike: response.data.main.feels_like,
                     humidity: response.data.main.humidity,
                     windSpeed: response.data.wind.speed,
+                    weatherType: response.data.weather[0].main,
                     weatherDescription: response.data.weather[0].description,
                     weatherIcon: response.data.weather[0].icon,
                     sunrise: response.data.sys.sunrise,
@@ -98,7 +97,6 @@ const MainContent = () => {
                 setWeather(weatherObject);
                 setIsLoading(false)
                 setIsSuccessful(true)
-                //   console.log(weatherObject);
             })
             .catch(function (error) {
                 console.log(error);
@@ -120,7 +118,6 @@ const MainContent = () => {
             <Container>
                 <Row>
                     <Col>
-
                         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                             <div className="form-group">
 

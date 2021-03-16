@@ -5,7 +5,10 @@ const Temperature = ({ tempValue, minTemp, maxTemp }) => {
 
             {tempValue && minTemp && maxTemp ? (
                 <div >
-                    <h3>{Math.round(tempValue)}<span style={{ fontSize: "0.9em" }}> &deg;C</span></h3>
+                    <h3>
+                    <b>{Math.round(tempValue)}</b>
+                    <sup>&deg;C</sup>
+                    </h3>
                     <h6>{Math.round(minTemp)}/{Math.round(maxTemp)} &deg;C</h6>
                 </div>
             ) :

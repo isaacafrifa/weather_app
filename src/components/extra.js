@@ -10,8 +10,6 @@ const convertTime= (dateLong, timezone) =>{
    return time
 }
 
-
-
     return (
         <div className="extra-details">
             <Container fluid>
