@@ -87,7 +87,7 @@ const MainContent = () => {
                                     type="text"
                                     placeholder="Enter City Name"
                                     minLength="1"
-                                    autoFocus
+                                    // autoFocus
                                 />
                                 {errors.cityName && (
                                     <p className="text-center" style={{ fontSize: "0.7em", color: "red" }}>{errors.cityName.message}</p>

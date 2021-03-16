@@ -9,7 +9,6 @@ import ExtraDetails from './extra';
 import LocationDetails from './LocationDetails';
 import { useSpring, animated } from 'react-spring'
 
-
 const Card = ({ weather }) => {
 
     const props = useSpring({
@@ -73,7 +72,7 @@ const Card = ({ weather }) => {
                 </Tilt>
             </div>
             {/* visible on small and medium screens */}
-            <p className="d-block d-sm-none d-none d-md-block d-lg-none" style={{ color: "black" }}>For a surprise, click on the card!</p>
+            {/* <p className="d-block d-sm-none d-none d-md-block d-lg-none" style={{ color: "black" }}>For a surprise, click on the card!</p> */}
 
         </animated.div>
     );
