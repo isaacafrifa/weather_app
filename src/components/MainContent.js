@@ -24,6 +24,7 @@ const MainContent = () => {
         setWeather(null)
     }
 
+
     const onSubmit = (data, e) => {
         e.target.reset(); // reset after form submit
         resetStateMessages()
@@ -87,14 +88,15 @@ const MainContent = () => {
                                     type="text"
                                     placeholder="Enter City Name"
                                     minLength="1"
-                                    // autoFocus
+                                // autoFocus
                                 />
                                 {errors.cityName && (
                                     <p className="text-center" style={{ fontSize: "0.7em", color: "red" }}>{errors.cityName.message}</p>
                                 )}
                             </div>
-                            <button type="submit"
-                                className="btn btn-primary"> Get weather </button>
+
+                            <input type="submit" className="btn btn-primary" value="Get weather" />
+
                         </form>
                         <br />
 
