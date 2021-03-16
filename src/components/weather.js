@@ -7,7 +7,7 @@ const Weather = ({ weatherDescription, weatherIcon }) => {
       to:{opacity: 1, marginLeft: 0  },
       from: { opacity: 0, marginLeft: -500  } })
 
-// http://openweathermap.org/img/wn/10d@2x.png 
+//icon url sample-> http://openweathermap.org/img/wn/10d@2x.png 
 const ICON_URL= 'http://openweathermap.org/img/wn/';
 
     return (
@@ -16,7 +16,7 @@ const ICON_URL= 'http://openweathermap.org/img/wn/';
                 < >
                     <animated.div style={props}>
                     <h6>{weatherDescription}</h6>
-                    <img src={`${ICON_URL}${weatherIcon}@2x.png`} className="img-fluid" alt={weatherDescription} style={{marginTop:"-1em"}}/>
+                    <img src={`${ICON_URL}${weatherIcon}@2x.png`} className="img-fluid weather-icon" alt={weatherDescription}/>
                     </animated.div>
                 </>
             ) :
@@ -28,8 +28,5 @@ const ICON_URL= 'http://openweathermap.org/img/wn/';
         </div>
     );
 }
-
-
-
 
 export default Weather;

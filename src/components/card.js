@@ -1,19 +1,21 @@
 import { Row, Col } from 'react-bootstrap';
 import Tilt from 'react-parallax-tilt';
 import DayImage from '../assets/images/day.jpeg'
-import NightImage from '../assets/images/night.jpeg'
+import NightImage from '../assets/images/night.gif'
 import Location from "./location";
 import Temperature from "./temperature";
 import Weather from "./weather";
 import ExtraDetails from './extra';
+import LocationDetails from './LocationDetails';
 import { useSpring, animated } from 'react-spring'
 
 
 const Card = ({ weather }) => {
 
-    const props = useSpring({ 
-        opacity: 1, 
-        from: { opacity: 0 } })
+    const props = useSpring({
+        opacity: 1,
+        from: { opacity: 0 }
+    })
 
     return (
         <animated.div style={props}>
@@ -32,9 +34,9 @@ const Card = ({ weather }) => {
                             <div className="card-image">
                                 {/* check for night or day */}
                                 {weather.weatherIcon.endsWith('n') ? (
-                                <img src={NightImage} className="img-fluid" alt="pic" />
+                                    <img src={NightImage} className="img-fluid" alt="pic" />
                                 ) :
-                                <img src={DayImage} className="img-fluid" alt="pic" />
+                                    <img src={DayImage} className="img-fluid" alt="pic" />
                                 }
                             </div>
                             <Row>
@@ -42,7 +44,6 @@ const Card = ({ weather }) => {
                                     <Location
                                         city={weather.city}
                                         country={weather.country}
-                                        timezone={weather.timezone}
                                     />
                                 </Col>
                                 <Col xs={7} md={6}>
@@ -56,19 +57,23 @@ const Card = ({ weather }) => {
                                 <Weather
                                     weatherDescription={weather.weatherDescription}
                                     weatherIcon={weather.weatherIcon} />
+
+                                <LocationDetails
+                                    timezone={weather.timezone}
+                                />
                             </div>
                             <div className="footer">
                                 <ExtraDetails
-                                    //not breaking obj down
+                                    //not breaking down object 
                                     weather={weather}
                                 />
                             </div>
                         </div>
                     </div>
                 </Tilt>
-                {/* visible on small and medium screens */}
-                {/* <p className="d-block d-sm-none d-none d-md-block d-lg-none" style={{color:"black"}}>For a surprise, click on the card!</p> */}
             </div>
+            {/* visible on small and medium screens */}
+            <p className="d-block d-sm-none d-none d-md-block d-lg-none" style={{ color: "black" }}>For a surprise, click on the card!</p>
 
         </animated.div>
     );

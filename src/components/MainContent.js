@@ -1,11 +1,9 @@
-
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { API_KEY, API_URL } from "../constants/constants";
 import axios from "axios";
 import { useForm } from 'react-hook-form';
 import Card from '../components/card';
-
 
 
 const MainContent = () => {
@@ -19,47 +17,11 @@ const MainContent = () => {
     //Using React Hook Form 
     const { register, handleSubmit, errors } = useForm(); // initialize the hook here
 
-    //get Weather Details
-    useEffect(() => {
-        // resetStateMessages();
-        // // api.openweathermap.org/data/2.5/weather?q=London,uk&appid={API key}
-        // axios.get('http://api.openweathermap.org/data/2.5/weather', {
-        //     params: {
-        //         q: 'London,uk',
-        //         units: 'metric', //For temperature in Celsius use units=metric
-        //         appid: API_KEY
-        //     }
-        // })
-        //     .then(function (response) {
-        //         console.log(response);
-        //         // console.log(response.data);
-        //         let jsonObject ={
-        //             city: response.data.name,
-        //             country: response.data.sys.country
-        //         }
-        //        setLocation(jsonObject);
-        //     //   console.log(jsonObject);
-        //     // setCity(jsonObject.city);
-        //     // setCountry(jsonObject.country);
-
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //         if (error.response.status === 404) {
-        //             setHasNotFoundError(true)
-        //         }
-        //         else {
-        //             setHasError(true)
-        //         }
-        //     });
-    }, []);
-
     const resetStateMessages = () => {
         setHasError(false)
         setHasNotFoundError(false)
         setIsSuccessful(false)
         setWeather(null)
-
     }
 
     const onSubmit = (data, e) => {
@@ -68,7 +30,7 @@ const MainContent = () => {
         setIsLoading(true)
 
         // api.openweathermap.org/data/2.5/weather?q=London,uk&appid={API key}
-        axios.get( API_URL, {
+        axios.get(API_URL, {
             params: {
                 q: data.cityName,
                 units: 'metric', //For temperature in Celsius use units=metric
@@ -92,7 +54,7 @@ const MainContent = () => {
                     weatherIcon: response.data.weather[0].icon,
                     sunrise: response.data.sys.sunrise,
                     sunset: response.data.sys.sunset,
-                    lastUpdate: response.data.dt 
+                    lastUpdate: response.data.dt
                 }
                 setWeather(weatherObject);
                 setIsLoading(false)
@@ -109,7 +71,6 @@ const MainContent = () => {
                     setIsLoading(false)
                 }
             });
-
     }
 
 
@@ -136,7 +97,7 @@ const MainContent = () => {
                             <button type="submit"
                                 className="btn btn-primary"> Get weather </button>
                         </form>
-                        <br/>
+                        <br />
 
                         {/* Show ProgressSpinner */}
                         {isLoading && (

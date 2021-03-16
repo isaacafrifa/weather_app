@@ -1,9 +1,10 @@
 
 const Temperature = ({ tempValue, minTemp, maxTemp }) => {
+  
     return (
         <div className="temperature">
-
-            {tempValue && minTemp && maxTemp ? (
+                {/*NB: temperature can be 0 */}
+            {tempValue!=null && minTemp!=null && maxTemp!=null ? (
                 <div >
                     <h3>
                     <b>{Math.round(tempValue)}</b>
