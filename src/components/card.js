@@ -25,7 +25,7 @@ const Card = ({ weather }) => {
                     tiltMaxAngleY={35}
                     perspective={900}
                     scale={1.1}
-                    transitionSpeed={10000}
+                    transitionSpeed={2000}
                     gyroscope={true}>
 
                     <div className="cards">

@@ -9,7 +9,7 @@ import Card from '../components/card';
 const MainContent = () => {
 
     const [hasError, setHasError] = useState(false)
-    const [hasNotFoundError, setHasNotFoundError] = useState(false)
+    const [hasResponseError, setHasResponseError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [isSuccessful, setIsSuccessful] = useState(false)
     const [weather, setWeather] = useState({})
@@ -19,7 +19,7 @@ const MainContent = () => {
 
     const resetStateMessages = () => {
         setHasError(false)
-        setHasNotFoundError(false)
+        setHasResponseError(null)
         setIsSuccessful(false)
         setWeather(null)
     }
@@ -38,41 +38,42 @@ const MainContent = () => {
                 appid: API_KEY
             }
         })
-            .then(function (response) {
-                console.log(response);
-                let weatherObject = {
-                    city: response.data.name,
-                    country: response.data.sys.country,
-                    timezone: response.data.timezone,
-                    temperature: response.data.main.temp,
-                    minTemperature: response.data.main.temp_min,
-                    maxTemperature: response.data.main.temp_max,
-                    feelsLike: response.data.main.feels_like,
-                    humidity: response.data.main.humidity,
-                    windSpeed: response.data.wind.speed,
-                    weatherType: response.data.weather[0].main,
-                    weatherDescription: response.data.weather[0].description,
-                    weatherIcon: response.data.weather[0].icon,
-                    sunrise: response.data.sys.sunrise,
-                    sunset: response.data.sys.sunset,
-                    lastUpdate: response.data.dt
-                }
-                setWeather(weatherObject);
-                setIsLoading(false)
-                setIsSuccessful(true)
-            })
+            .then(response => {
+                    console.log(response);
+                    let weatherObject = {
+                        city: response.data.name,
+                        country: response.data.sys.country,
+                        timezone: response.data.timezone,
+                        temperature: response.data.main.temp,
+                        minTemperature: response.data.main.temp_min,
+                        maxTemperature: response.data.main.temp_max,
+                        feelsLike: response.data.main.feels_like,
+                        humidity: response.data.main.humidity,
+                        windSpeed: response.data.wind.speed,
+                        weatherType: response.data.weather[0].main,
+                        weatherDescription: response.data.weather[0].description,
+                        weatherIcon: response.data.weather[0].icon,
+                        sunrise: response.data.sys.sunrise,
+                        sunset: response.data.sys.sunset,
+                        lastUpdate: response.data.dt
+                    }
+                    setWeather(weatherObject);
+                    setIsLoading(false)
+                    setIsSuccessful(true)
+                })
             .catch(function (error) {
                 console.log(error);
-                if (error.response.status === 404) {
-                    setHasNotFoundError(true)
-                    setIsLoading(false)
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    setHasResponseError(error.response.data.message) //usually expecting NotFound   
                 }
                 else {
                     setHasError(true)
-                    setIsLoading(false)
                 }
+                setIsLoading(false)
             });
     }
+
 
     return (
         <div>
@@ -94,9 +95,8 @@ const MainContent = () => {
                                     <p className="text-center" style={{ fontSize: "0.7em", color: "red" }}>{errors.cityName.message}</p>
                                 )}
                             </div>
-
-                            <input type="submit" className="btn btn-primary" value="Get weather" />
-
+                            <button type="submit"
+                                className="btn btn-primary"> Get weather </button>
                         </form>
                         <br />
 
@@ -107,10 +107,10 @@ const MainContent = () => {
                             </div>
                         )}
 
-                        {/* CITY NOT FOUND MSG */}
-                        {hasNotFoundError && (
+                        {/* RESPONSE ERROR MSG */}
+                        {hasResponseError && (
                             <div className="alert alert-danger mt-2">
-                                <h6 className="alert-heading text-center">City Not Found</h6>
+                                <h6 className="alert-heading text-center" style={{ textTransform: "capitalize" }}>{hasResponseError}</h6>
                             </div>
                         )}
                         {/* ERROR MSG */}
