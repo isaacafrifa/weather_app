@@ -22,7 +22,7 @@ This project is a **ReactJS** powered application and was bootstrapped with Crea
 
 
 ### App Screenshot
-![diagram](./app_image.png)
+![screenshot](./app_image.png)
 
 
 ### Technologies 
@@ -37,11 +37,10 @@ Project is created using:
 
 ### Features 
  * The project for now provides information such as:
- 
-- city and country
-- local date and time
-- min/max temperature
-- sunrise and sunset etc.
+    - city and country
+    - local date and time
+    - min/max temperature
+    - sunrise and sunset etc.
 
 
 ### Future Additions
