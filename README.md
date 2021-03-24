@@ -1,8 +1,12 @@
 # Weather App
 
+### Live Demo
+[https://weatherblo.netlify.app](https://weatherblo.netlify.app/)
+
 ## Table of contents
 * [General Info](#markdown-header-general-info)
 * [Description](#markdown-header-description)
+* [App Screenshot](#markdown-header-app-screenshot)
 * [Technologies](#markdown-header-technologies)
 * [Features](#markdown-header-features)
 
@@ -12,37 +16,40 @@ This project is a **ReactJS** powered application and was bootstrapped with Crea
 
 
 ### Description 
-This project serves pages for a Weather Web App.
- .
-+ This project will be pubished on netlify.
+* This project is a Weather Web App which displays the weather forecast for user-specified locations.
++ This project is pubished on netlify.
 + VERSION: v 1.0
 
 
-### Technologies 
-Project is created with:
+### App Screenshot
+![diagram](./app_image.png)
 
-* React JS 
-* Axios - for REST calls
+
+### Technologies 
+Project is created using:
+
+* Axios - for API calls
 * Bootstrap
 * React Hook Form
-* Particles 
+* Particles - for particles background
+* Parallax Tilt - for tilt effect
+
 
 ### Features 
- The project for now has the following features:
+ * The project for now provides information such as:
  
-* Open Weather calls
+- city and country
+- local date and time
+- min/max temperature
+- sunrise and sunset etc.
 
 
 ### Future Additions
-* N/A
+* Produce an hourly or weekly forecast
+
 
 ### Acknowledgement
-* Open Weather
-
-### Notable: 
-#### React Router Fix 
-* Fixing React Router errors in Netlify
-(Fix)[https://dev.to/dance2die/page-not-found-on-netlify-with-react-router-58mc](https://dev.to/dance2die/page-not-found-on-netlify-with-react-router-58mc)
+* Open Weather API
 
 
 ### Who do I talk to? 
